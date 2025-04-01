@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
-
 const firebaseConfig = {
     apiKey: "AIzaSyDdzpB9RIjmqlbY7JCiyU7jVt9D8Gi47QE",
     authDomain: "fir-assignment-a5bae.firebaseapp.com",
@@ -10,7 +9,7 @@ const firebaseConfig = {
     messagingSenderId: "68096552344",
     appId: "1:68096552344:web:df7f8f1e83170ad7448fed",
     measurementId: "G-4506J7FCGG"
-  };
+};
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -29,9 +28,14 @@ window.addNote = addNote;
 onSnapshot(noteRef, (snapshot) => {
     const noteList = document.getElementById("noteList");
     noteList.innerHTML = "";
-    snapshot.docs.forEach((doc) => {
+
+    const sortedNotes = snapshot.docs
+        .map(doc => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => a.timestamp.toDate() - b.timestamp.toDate());
+
+    sortedNotes.forEach((note) => {
         const li = document.createElement("li");
-        li.textContent = doc.data().text;
+        li.textContent = note.text;
         noteList.appendChild(li);
     });
 });
