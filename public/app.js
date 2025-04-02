@@ -1,4 +1,4 @@
-import firebaseConfig from '../firebaseconfig.js';
+import { firebaseConfig } from "./firebaseconfig.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
 
@@ -25,8 +25,10 @@ onSnapshot(noteRef, (snapshot) => {
         .sort((a, b) => a.timestamp.toDate() - b.timestamp.toDate());
 
     sortedNotes.forEach((note) => {
-        const li = document.createElement("li");
-        li.textContent = note.text;
-        noteList.appendChild(li);
+        const noteDiv = document.createElement("div");
+        noteDiv.classList.add("note");
+        noteDiv.textContent = note.text;
+
+        noteList.appendChild(noteDiv);
     });
 });

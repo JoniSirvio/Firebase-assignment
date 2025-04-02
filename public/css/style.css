@@ -54,7 +54,31 @@ h3{
     margin: 2rem;
 }
 
-ul{
-    margin: 3em;
-    font-size: 1em;
+#noteList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.note {
+    width: 150px;
+    height: 150px;
+    background-color: #ffeb3b;
+    padding: 15px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.note:hover {
+    transform: scale(1.05);
 }
